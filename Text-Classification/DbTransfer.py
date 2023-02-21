@@ -1,40 +1,30 @@
-import pyodbc as po
 from MLNewsArticle import finalDict
+import mysql.connector
+import json
+
+# Connect to MySQL server
+cnxn = mysql.connector.connect(
+  host="localhost",
+  user="root",
+  password="Hs02209374%",
+  database="NewsExtractDb"
+)
 
 
-# Connection variables
-server = '127.0.0.1'
-database = 'NewsExtractDb'
-username = 'sa'
-password = 'MyPass@word'
-
-# Connection string
-cnxn = po.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' +
-        server+';DATABASE='+database+';UID='+username+';PWD=' + password)
+# Create a cursor object
 cursor = cnxn.cursor()
 
-
-#thenewList = finalDict
-
-lst = [{'title':'this a title', 'summary': 'this a summary', 'link': 'this a link', 'topic': "this a topic, this a topic2, this a topic3"}, 
-       {'title':'this a title2', 'summary': 'this a summary2', 'link': 'this a link2', 'topic': "this a topic, this a topic2, this a topic3"}, 
-       {'title':'this a title3', 'summary': 'this a summary3', 'link': 'this a link3', 'topic': "this a topic, this a topic2, this a topic3"}]
-
-newList = [*[list(idx.values()) for idx in lst]]
-
-print(newList)
+# Sample data in string format
+lst = finalDict
 
 
-cursor.executemany("""
-INSERT INTO dbo.Dataset (title, summary, link, [topic]) 
-VALUES (?,?,?,?)""",newList)
+# Insert data into database
+sql = "INSERT INTO dataset (title, summary, link, topic) VALUES (%s, %s, %s, %s)"
+params = [(item['title'], item['summary'], item['link'], ', '.join(item['topic'])) for item in lst]
+cursor.executemany(sql, params)
 cnxn.commit()
 
-'''
-cursor.execute("""
-DELETE FROM dbo.Dataset""")
-cnxn.commit()
-'''
+
 
 '''
 cursor.execute("SELECT @@version;") 

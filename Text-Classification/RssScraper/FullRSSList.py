@@ -15,7 +15,7 @@ for url in RSS_URLS:
 ######################################################################################
 
 
-#print(posts)
+print(posts)
 ##################### Extracting the necessary items from RSS FEED ##################
 
 def gettingNecessaryList():

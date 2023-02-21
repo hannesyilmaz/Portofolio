@@ -25,7 +25,7 @@ from RssScraper.RssFeedNewArticle import printdepositlist #transfer your own lis
 
 ################################# Import your pre-label data #################################
 
-data_path = "/Users/hannesyilmaz/Desktop/Portofolio/Text-Classification/Book1.csv"
+data_path = "/Users/Hanne/Portofolio/Text-Classification/Book1.csv"
 
 data_raw = pd.read_csv(data_path)
 
@@ -83,7 +83,7 @@ def keepAlpha(sentence):
 
 ################################# Getting rid of stopwords and stemming the lexemes #################################
 
-#nltk.download('stopwords')
+nltk.download('stopwords')
 
 stop_words = set(stopwords.words('swedish'))
 stop_words.update(['noll','ett','två','tre','fyra','fem','sex','sju','åtta','nio','tio','kunna','också','över','bland','förutom','hursom','än','inom'])
@@ -292,5 +292,5 @@ key_list = ['title', 'summary', 'link', 'topic']
 
 finalDict = [dict( zip(key_list, v)) for v in TotalLists]
 
-print(finalDict)
+#print(finalDict)
 ##########################################################################################################################
