@@ -288,9 +288,9 @@ TotalLists = [a+[x] for a,x in zip(MyTheFinalList, onlyCategoryList)]
 
 ################################# Converting TotalLists to Dictionary ###################################################
 
-key_list = ['title', 'summary', 'link', 'topic']
+key_list = ['title', 'summary', 'link', 'published', 'topic']
 
 finalDict = [dict( zip(key_list, v)) for v in TotalLists]
 
-#print(finalDict)
+print(finalDict)
 ##########################################################################################################################

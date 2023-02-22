@@ -1,6 +1,5 @@
 from MLNewsArticle import finalDict
 import mysql.connector
-import json
 
 # Connect to MySQL server
 cnxn = mysql.connector.connect(
@@ -19,8 +18,8 @@ lst = finalDict
 
 
 # Insert data into database
-sql = "INSERT INTO dataset (title, summary, link, topic) VALUES (%s, %s, %s, %s)"
-params = [(item['title'], item['summary'], item['link'], ', '.join(item['topic'])) for item in lst]
+sql = "INSERT INTO dataset (title, summary, link, published, topic) VALUES (%s, %s, %s, %s, %s)"
+params = [(item['title'], item['summary'], item['link'], item['published'], ', '.join(item['topic'])) for item in lst]
 cursor.executemany(sql, params)
 cnxn.commit()
 

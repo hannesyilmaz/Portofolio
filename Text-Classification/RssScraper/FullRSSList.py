@@ -1,4 +1,5 @@
 import feedparser
+import datetime
 
 
 ################################ RSS FEED Parser #####################################
@@ -15,7 +16,7 @@ for url in RSS_URLS:
 ######################################################################################
 
 
-print(posts)
+#print(posts)
 ##################### Extracting the necessary items from RSS FEED ##################
 
 def gettingNecessaryList():
@@ -29,6 +30,7 @@ def gettingNecessaryList():
             tempdict["title"] = x["title"]
             tempdict["summary"] = x["summary"]
             tempdict["link"] = x["link"]
+            tempdict["published"] = x["published"]
             allitems.append(tempdict)
         except:
             allitems.append("")
@@ -52,6 +54,7 @@ def ThefinalList():
     key1 = "title"
     key2 = "summary"
     key3 = "link"
+    key4 = "published"
 
     for x in AllItemsX:
         for key in x:
@@ -61,9 +64,25 @@ def ThefinalList():
                 tempList.append(x[key])
             if key3 == key:
                 tempList.append(x[key])
+            if key4 == key:
+                # datetime conversion code
+                date_str = x[key]
+                date_obj = None
+                try:
+                    date_obj = datetime.datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S %z')
+                except ValueError:
+                    try:
+                        date_obj = datetime.datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S%z')
+                    except ValueError:
+                        try:
+                            date_obj = datetime.datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S %Z')
+                        except ValueError:
+                            print(f'Error: unrecognized date format {date_str}')
+                if date_obj is not None:
+                    tempList.append(date_obj.strftime('%Y-%m-%d %H:%M:%S'))
         finalList.append(tempList)
         tempList = []
-    
+
     return finalList
 
 
