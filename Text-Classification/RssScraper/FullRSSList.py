@@ -1,22 +1,7 @@
-import feedparser
+from RssArticles import posts
+
 import datetime
 
-
-################################ RSS FEED Parser #####################################
-RSS_URLS = ['http://www.dn.se/nyheter/m/rss/',
-            'https://rss.aftonbladet.se/rss2/small/pages/sections/senastenytt/', 'https://feeds.expressen.se/nyheter/',
-            'http://www.svd.se/?service=rss', 'http://api.sr.se/api/rss/program/83?format=145',
-            'http://www.svt.se/nyheter/rss.xml'
-              ]
-
-posts = []
-
-for url in RSS_URLS:
-    posts.extend(feedparser.parse(url).entries)
-######################################################################################
-
-
-#print(posts)
 ##################### Extracting the necessary items from RSS FEED ##################
 
 def gettingNecessaryList():
@@ -88,7 +73,7 @@ def ThefinalList():
 
 MyTheFinalList = ThefinalList()
 
-#print(MyTheFinalList)
+print(MyTheFinalList)
 #print(len(MyTheFinalList))
 ############################################################################################################
 
