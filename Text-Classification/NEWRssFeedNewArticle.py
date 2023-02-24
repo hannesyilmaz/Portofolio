@@ -1,10 +1,12 @@
-# This scripts extracts RSS-feed from the online News-sites
+# This scripts receives the posts (Rss extracted news articles from the NEWRsArticles.py file)
 # it is then cleans and structures them to be imported by another script
 
 # Import packages/files
 from NEWRssArticles import posts
-import feedparser
+
 """
+import feedparser
+
 # This function can be used if from NEWRssArticles import posts is not desired
 ################################ RSS FEED Parser #####################################
 

@@ -1,82 +1,6 @@
-
-"""
-import re
-import sys
-import warnings
-import nltk
-import pandas as pd
-import numpy as np
-from nltk.corpus import stopwords
-from nltk.stem.snowball import SnowballStemmer
-from sklearn.model_selection import train_test_split
-
-################################# Import your pre-labeled data #################################
-
-data_path = "/Users/Hanne/Portofolio/Text-Classification/Book1.csv"
-
-data_raw = pd.read_csv(data_path)
-
-data = data_raw
-data = data_raw.loc[np.random.choice(data_raw.index, size=len(data_raw))]
-#data.shape
-
-###############################################################################################
-
-## This to supress all warning messages that normally be printed to the console.
-if not sys.warnoptions:
-    warnings.simplefilter("ignore")
-
-################################# Check for the categories of Data #################################
-
-categories = list(data_raw.columns.values)
-categories = categories[2:]
-#print(categories)
-
-
-################################# Getting rid of stopwords and stemming the lexemes #################################
-
-nltk.download('stopwords')
-
-stop_words = set(stopwords.words('swedish'))
-stop_words.update(['noll','ett','två','tre','fyra','fem','sex','sju','åtta','nio','tio','kunna','också','över','bland','förutom','hursom','än','inom'])
-re_stop_words = re.compile(r"\b(" + "|".join(stop_words) + ")\\W", re.I)
-def removeStopWords(sentence):
-    global re_stop_words
-    return re_stop_words.sub(" ", sentence)
-
-data['Heading'] = data['Heading'].apply(removeStopWords)
-data.head()
-
-stemmer = SnowballStemmer("swedish")
-def stemming(sentence):
-    stemSentence = ""
-    for word in sentence.split():
-        stem = stemmer.stem(word)
-        stemSentence += stem
-        stemSentence += " "
-    stemSentence = stemSentence.strip()
-    return stemSentence
-
-data['Heading'] = data['Heading'].apply(stemming)
-data.head()
-
-#####################################################################################################################
-
-################################# Splitting the data into training and testing chunks #################################
-
-train, test = train_test_split(data, random_state=42, test_size=0.30, shuffle=True)
-
-#print(train.shape)
-#print(test.shape)
-
-train_text = train['Heading']
-test_text = test['Heading']
-
-########################################################################################################################
-
-"""
-
-
+# This script creates a ML Model for text classification for two purposes;
+# 1- Clean and Pre-process the data to be imported by the NEWMLModelReturns.py file
+# 2- It measures the accuracy of the model itself (so when adding more data to Book1 dataset, this script must be run to calculate the accuracy)
 
 
 import re
@@ -252,5 +176,88 @@ accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
 ###############################################################################################################
 
+
+
+
+
+
+
+# The Old Script (for referance purposes)
+"""
+import re
+import sys
+import warnings
+import nltk
+import pandas as pd
+import numpy as np
+from nltk.corpus import stopwords
+from nltk.stem.snowball import SnowballStemmer
+from sklearn.model_selection import train_test_split
+
+################################# Import your pre-labeled data #################################
+
+data_path = "/Users/Hanne/Portofolio/Text-Classification/Book1.csv"
+
+data_raw = pd.read_csv(data_path)
+
+data = data_raw
+data = data_raw.loc[np.random.choice(data_raw.index, size=len(data_raw))]
+#data.shape
+
+###############################################################################################
+
+## This to supress all warning messages that normally be printed to the console.
+if not sys.warnoptions:
+    warnings.simplefilter("ignore")
+
+################################# Check for the categories of Data #################################
+
+categories = list(data_raw.columns.values)
+categories = categories[2:]
+#print(categories)
+
+
+################################# Getting rid of stopwords and stemming the lexemes #################################
+
+nltk.download('stopwords')
+
+stop_words = set(stopwords.words('swedish'))
+stop_words.update(['noll','ett','två','tre','fyra','fem','sex','sju','åtta','nio','tio','kunna','också','över','bland','förutom','hursom','än','inom'])
+re_stop_words = re.compile(r"\b(" + "|".join(stop_words) + ")\\W", re.I)
+def removeStopWords(sentence):
+    global re_stop_words
+    return re_stop_words.sub(" ", sentence)
+
+data['Heading'] = data['Heading'].apply(removeStopWords)
+data.head()
+
+stemmer = SnowballStemmer("swedish")
+def stemming(sentence):
+    stemSentence = ""
+    for word in sentence.split():
+        stem = stemmer.stem(word)
+        stemSentence += stem
+        stemSentence += " "
+    stemSentence = stemSentence.strip()
+    return stemSentence
+
+data['Heading'] = data['Heading'].apply(stemming)
+data.head()
+
+#####################################################################################################################
+
+################################# Splitting the data into training and testing chunks #################################
+
+train, test = train_test_split(data, random_state=42, test_size=0.30, shuffle=True)
+
+#print(train.shape)
+#print(test.shape)
+
+train_text = train['Heading']
+test_text = test['Heading']
+
+########################################################################################################################
+
+"""
 
 

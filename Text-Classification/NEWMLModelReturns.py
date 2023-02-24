@@ -1,3 +1,8 @@
+# This code takes in the ML model & values from NEWMLModelMLC.py and builds a pipeline 
+# Then it takes in the new data from NEWFullRSSList.py to pass into the prediction algorithm
+# At the end it gives out a dictionary with all the categories matching their respective values 
+
+
 import numpy as np
 from collections import defaultdict
 from NEWFullRSSList import MyTheFinalList
