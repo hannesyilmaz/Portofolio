@@ -1,4 +1,4 @@
-from RssArticles import posts
+from NEWRssArticles import posts
 
 import datetime
 
@@ -73,7 +73,7 @@ def ThefinalList():
 
 MyTheFinalList = ThefinalList()
 
-print(MyTheFinalList)
+#print(MyTheFinalList)
 #print(len(MyTheFinalList))
 ############################################################################################################
 

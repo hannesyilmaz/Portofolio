@@ -1,7 +1,7 @@
 # This is a Machine Learning script that uses pre-labeled and pre-processed 
-# data to train a ML algorithm to run a multi-label classification task
+# data to train an ML algorithm to run a multi-label classification task
 
-# Import all the neccecary packages for the program
+# Import all the neccesary packages for the program
 import re
 import sys
 import warnings
@@ -16,14 +16,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.multiclass import OneVsRestClassifier
-from RssScraper.FullRSSList import MyTheFinalList # RssScraper is the folder and FullRSSList is the file inside it
-from RssScraper.RssFeedNewArticle import printdepositlist #transfer your own list of pre-processed data from another Python Script
+from NEWFullRSSList import MyTheFinalList # RssScraper is the folder and FullRSSList is the file inside it
+from NEWRssFeedNewArticle import printdepositlist #transfer your own list of pre-processed data from another Python Script
 
 
 
 
 
-################################# Import your pre-label data #################################
+################################# Import your pre-labeled data #################################
 
 data_path = "/Users/Hanne/Portofolio/Text-Classification/Book1.csv"
 
@@ -117,7 +117,7 @@ data.head()
 train, test = train_test_split(data, random_state=42, test_size=0.30, shuffle=True)
 
 #print(train.shape)
-#kprint(test.shape)
+#print(test.shape)
 
 train_text = train['Heading']
 test_text = test['Heading']
@@ -179,7 +179,7 @@ for category in categories:
     n_counter = []
     for text in x_test:
         prediction = LogReg_pipeline.predict(text)
-            #print(type(prediction))
+        #print(type(prediction))
         for pred in np.nditer(prediction):
             #print('Predicted as {}'.format(pred)) #Your own sample data test
             #print("\n")
@@ -195,7 +195,7 @@ for category in categories:
                 tempDict[actual_text] = "empty"
                 dicts.append(tempDict)
 
-#print(dicts)
+print(dicts)
 
 
 ###############################################################################################################
@@ -292,5 +292,5 @@ key_list = ['title', 'summary', 'link', 'published', 'topic']
 
 finalDict = [dict( zip(key_list, v)) for v in TotalLists]
 
-print(finalDict)
+#print(finalDict)
 ##########################################################################################################################

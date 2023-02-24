@@ -20,3 +20,5 @@ for url in RSS_URLS:
     posts.extend(feedparser.parse(url).entries)
 
 ######################################################################################
+
+#print(posts)
