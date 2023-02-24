@@ -5,7 +5,7 @@
 from NEWRssArticles import posts
 import feedparser
 """
-
+# This function can be used if from NEWRssArticles import posts is not desired
 ################################ RSS FEED Parser #####################################
 
 RSS_URLS = ['http://www.dn.se/nyheter/m/rss/',
