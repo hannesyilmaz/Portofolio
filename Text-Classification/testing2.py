@@ -1,3 +1,0 @@
-from NEWRssFeedNewArticle import printdepositlist
-
-print(printdepositlist)

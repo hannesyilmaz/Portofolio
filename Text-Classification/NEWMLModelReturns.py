@@ -1,6 +1,6 @@
 # This code takes in the ML model & values from NEWMLModelMLC.py and builds a pipeline 
 # Then it takes in the new data from NEWFullRSSList.py to pass into the prediction algorithm
-# At the end it gives out a dictionary with all the categories matching their respective values 
+# At the end it gives out a dictionary with all the categories matching their respective values after creating a new list that contains the only dictiories that adheres to the schema
 
 
 import numpy as np
@@ -10,6 +10,7 @@ from NEWMLModelMLC import categories, x_test, train, x_train, my_text #transfer 
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.multiclass import OneVsRestClassifier
+import jsonschema
 
 
 ################################# Setting up ML algorithm  ###################################################
@@ -46,7 +47,7 @@ for category in categories:
                 tempDict[actual_text] = "empty"
                 dicts.append(tempDict)
 
-print(dicts)
+#print(dicts)
 
 
 ###############################################################################################################
@@ -107,5 +108,46 @@ key_list = ['title', 'summary', 'link', 'published', 'topic']
 
 finalDict = [dict( zip(key_list, v)) for v in TotalLists]
 
-print(finalDict)
+#print("this is finalDict: ", finalDict)
 ##########################################################################################################################
+
+
+################################# Checking dictionaries' integrity #######################################################
+
+# Create a new list of dictionaries that adhere to the schema
+
+# Define the JSON schema
+# Define the JSON schema
+schema = {
+  "type": "object",
+  "properties": {
+    "title": {"type": "string"},
+    "summary": {"type": "string"},
+    "link": {"type": "string", "format": "uri"},
+    "published": {"type": "string", "format": "date-time"},
+    "topic": {"type": "array"}
+  },
+  "required": ["title", "summary", "link", "published", "topic"],
+  "additionalProperties": False
+}
+
+valid_list = []
+for item in finalDict:
+    try:
+        jsonschema.validate(instance=item, schema=schema)
+        valid_list.append(item)
+    except jsonschema.exceptions.ValidationError:
+        print("Dictionary is invalid and will be removed.")
+
+
+validDict = valid_list
+
+print(validDict)
+print(len(finalDict))
+print(len(validDict))
+
+
+
+
+##########################################################################################################################
+

@@ -1,4 +1,4 @@
-from MLNewsArticle import finalDict
+from NEWMLModelReturns import validDict
 import mysql.connector
 
 # Connect to MySQL server
@@ -14,8 +14,7 @@ cnxn = mysql.connector.connect(
 cursor = cnxn.cursor()
 
 # Sample data in string format
-lst = finalDict
-
+lst = validDict
 
 # Insert data into database
 sql = "INSERT INTO dataset (title, summary, link, published, topic) VALUES (%s, %s, %s, %s, %s)"

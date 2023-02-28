@@ -134,7 +134,7 @@ vectorizer.fit(my_text_no_empty)
 x_train = vectorizer.transform(train_text)
 y_train = train.drop(labels = ['Id','Heading'], axis=1)
 
-print("Traning data shape after vectorization:", x_train.shape)
+#print("Traning data shape after vectorization:", x_train.shape)
 
 #x_test = vectorizer.transform(my_text_no_empty) #For single case (your own sample text) checking
 #y_test = test.drop(labels = ['Id','Heading'], axis=1)
@@ -155,8 +155,8 @@ LogReg_pipeline = Pipeline([
 
 cv_scores = cross_val_score(LogReg_pipeline, x_train, y_train, cv=5) #Perform 5-fold cross-validation
 
-print("Cross-validation scores:", cv_scores)
-print("Mean cross-validation score:", cv_scores.mean())
+#print("Cross-validation scores:", cv_scores)
+#print("Mean cross-validation score:", cv_scores.mean())
 
 ###############################################################################################################
 
@@ -173,7 +173,7 @@ y_pred = LogReg_pipeline.predict(x_test)
 ################################# Calculate and print the accuracy ###################################################
 
 accuracy = accuracy_score(y_test, y_pred)
-print("Accuracy:", accuracy)
+#print("Accuracy:", accuracy)
 ###############################################################################################################
 
 
