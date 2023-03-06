@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\WebExtractor2.props" />
+</Project>

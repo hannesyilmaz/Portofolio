@@ -1,0 +1,69 @@
+﻿@model List<ArticleModel>
+
+@{
+    var topics = Model.Select(a => a.Topic).Distinct().OrderBy(t => t);
+    var sortOrder = ViewData["SortOrder"] as string;
+    string selectedTopic = ViewData["SelectedTopic"] as string;
+    IEnumerable<ArticleModel> articles = Model;
+
+    if (!string.IsNullOrEmpty(selectedTopic))
+    {
+        articles = articles.Where(a => a.Topic == selectedTopic);
+    }
+
+    if (sortOrder == "desc")
+    {
+        articles = articles.OrderByDescending(a => a.Published);
+    }
+    else
+    {
+        articles = articles.OrderBy(a => a.Published);
+    }
+}
+
+<form asp-controller="Home" asp-action="Index" method="get">
+    <div>
+        <label>All Topics:</label>
+        <input type="radio" name="topic" value="" @(ViewData["SelectedTopic"] == null ? "checked" : "") onchange="this.form.submit()" /> All&nbsp;&nbsp;
+        @foreach (var topic in topics)
+        {
+            <input type="radio" name="topic" value="@topic" @(ViewData["SelectedTopic"] as string == topic ? "checked" : "") onchange="this.form.submit()" /> @Html.Raw("&nbsp;&nbsp;"+topic)
+        }
+    </div>
+    <button type="submit">Filter</button>
+    <button type="button" onclick="window.location.href='@Url.Action("Index", "Home")'">Clear</button>
+    <button type="button" onclick="window.location.href='@Url.Action("Index", "Home", new { sortOrder = ViewBag.SortOrder == "asc" ? "desc" : "asc", SelectedTopic = ViewData["SelectedTopic"] })'">
+        @if (sortOrder == "desc")
+        {
+            <i class="fa fa-sort-amount-down"></i>
+        }
+        else
+        {
+            <i class="fa fa-sort-amount-up"></i>
+        }
+    </button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Summary</th>
+            <th>Link</th>
+            <th>Published</th>
+            <th>Topic</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in articles)
+        {
+            <tr>
+                <td>@article.Title</td>
+                <td>@article.Summary</td>
+                <td>@article.Link</td>
+                <td>@article.Published?.ToString("dd/MM/yyyy")</td>
+                <td>@article.Topic</td>
+            </tr>
+        }
+    </tbody>
+</table>
