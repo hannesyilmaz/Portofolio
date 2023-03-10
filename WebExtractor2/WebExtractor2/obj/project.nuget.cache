@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CBtm+C3Vczvmv2KVXXvNLRK7W1OBA+pV5dZB7no0uxn8PbmupB6szNrpJQx/NqYyk08Z0E+WO3mbK3e04TZzCA==",
+  "dgSpecHash": "rDjjaK7CRP8SDJGhdGkBws/NoxfG2ncbJon/m8LLXVrNSvDMsRz3+OXzL9J1nhMq/2OSHQdGIw8c8q1xwOAXUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Hanne\\source\\repos\\WebExtractor2\\WebExtractor2\\WebExtractor2.csproj",
+  "projectFilePath": "C:\\Users\\Hanne\\Portofolio\\WebExtractor2\\WebExtractor2\\WebExtractor2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Hanne\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\Hanne\\.nuget\\packages\\k4os.compression.lz4\\1.2.6\\k4os.compression.lz4.1.2.6.nupkg.sha512",

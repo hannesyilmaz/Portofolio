@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System.Data;
-using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
 using WebExtractor2.Models;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
 
 namespace WebExtractor2.Controllers
 {
@@ -16,13 +17,32 @@ namespace WebExtractor2.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string topic)
+        {
+            // Get all articles from the database
+            List<ArticleModel> allArticles = GetArticlesFromDatabase();
+
+            // Filter the articles by topic if a specific topic is selected
+            if (!string.IsNullOrEmpty(topic))
+            {
+                allArticles = allArticles.Where(article => article.Topic.Contains(topic)).ToList();
+            }
+
+            // Pass the list of ArticleModel objects and the selected topic to the view to be displayed
+            ViewBag.SelectedTopic = topic;
+            return View(allArticles);
+        }
+
+        private List<ArticleModel> GetArticlesFromDatabase()
         {
             // Connection string for MySQL database
             string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%";
 
             // SQL query to retrieve data from database
             string sql = "SELECT title, summary, link, published, topic FROM dataset";
+
+            // Create a list to hold ArticleModel objects
+            List<ArticleModel> articles = new List<ArticleModel>();
 
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
@@ -31,9 +51,6 @@ namespace WebExtractor2.Controllers
                     conn.Open();
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        // Create a list to hold ArticleModel objects
-                        List<ArticleModel> articles = new List<ArticleModel>();
-
                         // Loop through each row in the result set and create an ArticleModel object from the data
                         while (reader.Read())
                         {
@@ -46,13 +63,13 @@ namespace WebExtractor2.Controllers
 
                             articles.Add(article);
                         }
-
-                        // Pass the list of ArticleModel objects to the view to be displayed
-                        return View(articles);
                     }
                 }
             }
+
+            return articles;
         }
+
 
         public IActionResult Privacy()
         {

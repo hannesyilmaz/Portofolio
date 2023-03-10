@@ -1536,11 +1536,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hanne\\source\\repos\\WebExtractor2\\WebExtractor2\\WebExtractor2.csproj",
+      "projectUniqueName": "C:\\Users\\Hanne\\Portofolio\\WebExtractor2\\WebExtractor2\\WebExtractor2.csproj",
       "projectName": "WebExtractor2",
-      "projectPath": "C:\\Users\\Hanne\\source\\repos\\WebExtractor2\\WebExtractor2\\WebExtractor2.csproj",
+      "projectPath": "C:\\Users\\Hanne\\Portofolio\\WebExtractor2\\WebExtractor2\\WebExtractor2.csproj",
       "packagesPath": "C:\\Users\\Hanne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hanne\\source\\repos\\WebExtractor2\\WebExtractor2\\obj\\",
+      "outputPath": "C:\\Users\\Hanne\\Portofolio\\WebExtractor2\\WebExtractor2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hanne\\AppData\\Roaming\\NuGet\\NuGet.Config",

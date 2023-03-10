@@ -1,48 +1,23 @@
 ﻿@model List<ArticleModel>
 
 @{
-    var topics = Model.Select(a => a.Topic).Distinct().OrderBy(t => t);
-    var sortOrder = ViewData["SortOrder"] as string;
-    string selectedTopic = ViewData["SelectedTopic"] as string;
-    IEnumerable<ArticleModel> articles = Model;
-
-    if (!string.IsNullOrEmpty(selectedTopic))
-    {
-        articles = articles.Where(a => a.Topic == selectedTopic);
-    }
-
-    if (sortOrder == "desc")
-    {
-        articles = articles.OrderByDescending(a => a.Published);
-    }
-    else
-    {
-        articles = articles.OrderBy(a => a.Published);
-    }
+    ViewBag.Title = "Articles";
 }
 
-<form asp-controller="Home" asp-action="Index" method="get">
-    <div>
-        <label>All Topics:</label>
-        <input type="radio" name="topic" value="" @(ViewData["SelectedTopic"] == null ? "checked" : "") onchange="this.form.submit()" /> All&nbsp;&nbsp;
-        @foreach (var topic in topics)
+<h1>Articles</h1>
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+    <label for="topic">Select a topic:</label>
+    <select id="topic" name="topic">
+        <option value="">All</option>
+        @foreach (var topic in Model.SelectMany(article => article.Topic.Split(',')).Distinct())
         {
-            <input type="radio" name="topic" value="@topic" @(ViewData["SelectedTopic"] as string == topic ? "checked" : "") onchange="this.form.submit()" /> @Html.Raw("&nbsp;&nbsp;"+topic)
+            <option value="@topic">@topic.Trim()</option>
         }
-    </div>
+    </select>
     <button type="submit">Filter</button>
-    <button type="button" onclick="window.location.href='@Url.Action("Index", "Home")'">Clear</button>
-    <button type="button" onclick="window.location.href='@Url.Action("Index", "Home", new { sortOrder = ViewBag.SortOrder == "asc" ? "desc" : "asc", SelectedTopic = ViewData["SelectedTopic"] })'">
-        @if (sortOrder == "desc")
-        {
-            <i class="fa fa-sort-amount-down"></i>
-        }
-        else
-        {
-            <i class="fa fa-sort-amount-up"></i>
-        }
-    </button>
-</form>
+}
 
 <table>
     <thead>
@@ -55,13 +30,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var article in articles)
+        @foreach (var article in Model)
         {
             <tr>
                 <td>@article.Title</td>
                 <td>@article.Summary</td>
-                <td>@article.Link</td>
-                <td>@article.Published?.ToString("dd/MM/yyyy")</td>
+                <td><a href="@article.Link">Link</a></td>
+                <td>@article.Published</td>
                 <td>@article.Topic</td>
             </tr>
         }
