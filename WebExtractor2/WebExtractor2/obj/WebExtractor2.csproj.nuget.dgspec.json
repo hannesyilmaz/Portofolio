@@ -43,6 +43,10 @@
             "Mysql.Data": {
               "target": "Package",
               "version": "[8.0.32, )"
+            },
+            "mongocsharpdriver": {
+              "target": "Package",
+              "version": "[2.19.0, )"
             }
           },
           "imports": [

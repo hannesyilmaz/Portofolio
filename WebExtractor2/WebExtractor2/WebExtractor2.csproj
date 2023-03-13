@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="mongocsharpdriver" Version="2.19.0" />
     <PackageReference Include="Mysql.Data" Version="8.0.32" />
   </ItemGroup>
 

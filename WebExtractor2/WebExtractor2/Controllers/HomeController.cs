@@ -5,6 +5,8 @@ using System.Linq;
 using WebExtractor2.Models;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
+using System.Globalization;
+using MongoDB.Driver.Builders;
 
 namespace WebExtractor2.Controllers
 {
@@ -17,7 +19,7 @@ namespace WebExtractor2.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(string topic)
+        public IActionResult Index(string topic, string sortBy)
         {
             // Get all articles from the database
             List<ArticleModel> allArticles = GetArticlesFromDatabase();
@@ -28,12 +30,27 @@ namespace WebExtractor2.Controllers
                 allArticles = allArticles.Where(article => article.Topic.Contains(topic)).ToList();
             }
 
-            // Pass the list of ArticleModel objects and the selected topic to the view to be displayed
+            // Sort the articles by published date based on the selected sorting option
+            switch (sortBy)
+            {
+                case "newest":
+                    allArticles = allArticles.OrderByDescending(article => article.Published).ToList();
+                    break;
+                case "oldest":
+                    allArticles = allArticles.OrderBy(article => article.Published).ToList();
+                    break;
+                default:
+                    break;
+            }
+
+            // Pass the list of ArticleModel objects, the selected topic, and the selected sorting option to the view to be displayed
             ViewBag.SelectedTopic = topic;
+            ViewBag.SelectedSortBy = sortBy;
             return View(allArticles);
         }
 
-        private List<ArticleModel> GetArticlesFromDatabase()
+
+        private List<ArticleModel> GetArticlesFromDatabase(bool ascending = true)
         {
             // Connection string for MySQL database
             string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%";
@@ -69,6 +86,7 @@ namespace WebExtractor2.Controllers
 
             return articles;
         }
+
 
 
         public IActionResult Privacy()
