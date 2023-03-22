@@ -17,7 +17,7 @@ cursor = cnxn.cursor()
 lst = validDict
 
 # Insert data into database
-sql = "INSERT INTO dataset (title, summary, link, published, topic) VALUES (%s, %s, %s, %s, %s)"
+sql = "INSERT INTO news (title, summary, link, published, topic) VALUES (%s, %s, %s, %s, %s)"
 params = [(item['title'], item['summary'], item['link'], item['published'], ', '.join(item['topic'])) for item in lst]
 cursor.executemany(sql, params)
 cnxn.commit()

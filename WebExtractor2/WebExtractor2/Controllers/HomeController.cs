@@ -56,7 +56,7 @@ namespace WebExtractor2.Controllers
             string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%";
 
             // SQL query to retrieve data from database
-            string sql = "SELECT title, summary, link, published, topic FROM dataset";
+            string sql = "SELECT title, summary, link, published, topic FROM news";
 
             // Create a list to hold ArticleModel objects
             List<ArticleModel> articles = new List<ArticleModel>();
