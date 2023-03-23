@@ -24,6 +24,9 @@ namespace WebExtractor2.Controllers
             // Get all articles from the database
             List<ArticleModel> allArticles = GetArticlesFromDatabase();
 
+            // Get all the unique topics from the articles
+            List<string> allTopics = allArticles.SelectMany(article => article.Topic.Split(',')).Distinct().ToList();
+
             // Filter the articles by topic if a specific topic is selected
             if (!string.IsNullOrEmpty(topic))
             {
@@ -43,11 +46,13 @@ namespace WebExtractor2.Controllers
                     break;
             }
 
-            // Pass the list of ArticleModel objects, the selected topic, and the selected sorting option to the view to be displayed
+            // Pass the list of ArticleModel objects, the selected topic, the selected sorting option, and the list of all topics to the view to be displayed
             ViewBag.SelectedTopic = topic;
             ViewBag.SelectedSortBy = sortBy;
+            ViewBag.AllTopics = allTopics;
             return View(allArticles);
         }
+
 
 
         private List<ArticleModel> GetArticlesFromDatabase(bool ascending = true)

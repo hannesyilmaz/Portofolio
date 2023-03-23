@@ -11,10 +11,20 @@
     <label for="topic">Select a topic:</label>
     <select id="topic" name="topic">
         <option value="">All</option>
-        @foreach (var topic in Model.SelectMany(article => article.Topic.Split(',')).Distinct())
+        @foreach (var topic in ViewBag.AllTopics)
         {
-            <option value="@topic">@topic.Trim()</option>
+            if (ViewBag.SelectedTopic == topic)
+            {
+                <option value="@topic" selected>@topic.Trim()</option>
+            }
+            else
+            {
+                <option value="@topic">@topic.Trim()</option>
+            }
         }
+
+
+
     </select>
     <label for="sortBy">Sort by:</label>
     <select id="sortBy" name="sortBy">
