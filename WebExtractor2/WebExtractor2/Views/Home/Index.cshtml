@@ -4,74 +4,83 @@
     ViewBag.Title = "Articles";
 }
 
-<h1>Articles</h1>
-
-@using (Html.BeginForm("Index", "Home", FormMethod.Get))
-{
-    <label for="topic">Select a topic:</label>
-    <select id="topic" name="topic">
-        <option value="">All</option>
-        @foreach (var topic in ViewBag.AllTopics)
-        {
-            if (ViewBag.SelectedTopic == topic)
-            {
-                <option value="@topic" selected>@topic.Trim()</option>
-            }
-            else
-            {
-                <option value="@topic">@topic.Trim()</option>
-            }
-        }
-
-
-
-    </select>
-    <label for="sortBy">Sort by:</label>
-    <select id="sortBy" name="sortBy">
-        @{
-            if (ViewBag.SelectedSortBy == "newest")
-            {
-                <option value="newest" selected>Newest to Oldest</option>
-            }
-            else
-            {
-                <option value="newest">Newest to Oldest</option>
-            }
-
-            if (ViewBag.SelectedSortBy == "oldest")
-            {
-                <option value="oldest" selected>Oldest to Newest</option>
-            }
-            else
-            {
-                <option value="oldest">Oldest to Newest</option>
-            }
-        }
-
-    </select>
-    <button type="submit">Filter</button>
+@{
+    Dictionary<string, string> topicDisplayNames = new Dictionary<string, string>
+    {
+        {"Halsa", "Hälsa"},
+        {"SamhalleKonflikter", "Samhälle och Konflikter"},
+        {"Miljo", "Miljö"},
+        {"VetenskapTeknik", "Vetenskap och Teknik"},
+        {"LivsstillFritt", "Livsstil och Fritid"}
+    };
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Summary</th>
-            <th>Link</th>
-            <th>Published</th>
-            <th>Topic</th>
-        </tr>
-    </thead>
-    <tbody>
+
+<h1>Articles</h1>
+
+<div class="container">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <label for="topic">Select a topic:</label>
+        <select id="topic" name="topic" class="form-select">
+            <option value="">All</option>
+            @foreach (var topic in ViewBag.AllTopics)
+            {
+                if (topic.Trim() != "empty")
+                {
+                    string displayName = topicDisplayNames.ContainsKey(topic.Trim()) ? topicDisplayNames[topic.Trim()] : topic.Trim();
+                    if (ViewBag.SelectedTopic == topic)
+                    {
+                        <option value="@topic" selected>@displayName</option>
+                    }
+                    else
+                    {
+                        <option value="@topic">@displayName</option>
+                    }
+                }
+            }
+
+
+        </select>
+        <label for="sortBy">Sort by:</label>
+        <select id="sortBy" name="sortBy" class="form-select">
+            <option value="">Default</option>
+            @{
+                if (ViewBag.SelectedSortBy == "newest")
+                {
+                    <option value="newest" selected>Newest to Oldest</option>
+                }
+                else
+                {
+                    <option value="newest">Newest to Oldest</option>
+                }
+
+                if (ViewBag.SelectedSortBy == "oldest")
+                {
+                    <option value="oldest" selected>Oldest to Newest</option>
+                }
+                else
+                {
+                    <option value="oldest">Oldest to Newest</option>
+                }
+            }
+        </select>
+        <button type="submit" class="btn btn-primary">Filter</button>
+    }
+
+    <div class="row mt-4">
         @foreach (var article in Model)
         {
-            <tr>
-                <td>@article.Title</td>
-                <td>@article.Summary</td>
-                <td><a href="@article.Link">Link</a></td>
-                <td>@article.Published</td>
-                <td>@article.Topic</td>
-            </tr>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.Title</h5>
+                        <p class="card-text">@article.Summary</p>
+                        <a href="@article.Link" class="card-link" target="_blank">Read More</a>
+                        <p class="card-text"><small class="text-muted">@article.Published</small></p>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
