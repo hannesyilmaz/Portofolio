@@ -28,9 +28,26 @@
     </select>
     <label for="sortBy">Sort by:</label>
     <select id="sortBy" name="sortBy">
-        <option value="">Default</option>
-        <option value="newest" selected="@(ViewBag.SelectedSortBy == "newest" ? "selected" : "")">Newest to Oldest</option>
-        <option value="oldest" selected="@(ViewBag.SelectedSortBy == "oldest" ? "selected" : "")">Oldest to Newest</option>
+        @{
+            if (ViewBag.SelectedSortBy == "newest")
+            {
+                <option value="newest" selected>Newest to Oldest</option>
+            }
+            else
+            {
+                <option value="newest">Newest to Oldest</option>
+            }
+
+            if (ViewBag.SelectedSortBy == "oldest")
+            {
+                <option value="oldest" selected>Oldest to Newest</option>
+            }
+            else
+            {
+                <option value="oldest">Oldest to Newest</option>
+            }
+        }
+
     </select>
     <button type="submit">Filter</button>
 }
