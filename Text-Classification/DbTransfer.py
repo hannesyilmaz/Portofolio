@@ -1,4 +1,4 @@
-from NEWMLModelReturns import validDict
+from MLModelReturns import validDict
 import mysql.connector
 
 # Connect to MySQL server

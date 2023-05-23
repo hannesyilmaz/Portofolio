@@ -3,7 +3,6 @@
 
 # Import packages
 import feedparser
-import datetime
 
 
 ################################ RSS FEED Parser #####################################

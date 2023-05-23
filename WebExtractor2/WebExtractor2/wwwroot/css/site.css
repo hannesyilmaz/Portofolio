@@ -16,3 +16,19 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Add this to your site.css file */
+.navbar {
+    background-color: #4a4a4a; /* Replace this with your preferred color */
+}
+
+.navbar-brand,
+.navbar-text {
+    color: #333; /* Adjust the color according to your preference */
+}
+
+
+.navbar-text {
+    font-style: italic;
+    margin-left: 10px;
+}

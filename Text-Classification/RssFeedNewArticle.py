@@ -1,8 +1,8 @@
 # This scripts receives the posts (Rss extracted news articles from the NEWRsArticles.py file)
-# it is then cleans and structures them to be imported by another script
+# it is then cleans and structures them to be imported by NEWMLModelMLC.py
 
 # Import packages/files
-from NEWRssArticles import posts
+from RssArticles import posts
 
 """
 import feedparser
@@ -79,6 +79,6 @@ def PrintDeposit():
 
 printdepositlist = PrintDeposit()
 
-#print(len(printdepositlist))
+#print(printdepositlist)
 
 ######################################################################################

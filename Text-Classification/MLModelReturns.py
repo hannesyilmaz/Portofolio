@@ -5,8 +5,8 @@
 
 import numpy as np
 from collections import defaultdict
-from NEWFullRSSList import MyTheFinalList
-from NEWMLModelMLC import categories, x_test, train, x_train, my_text #transfer your own list of pre-processed data from another Python Script
+from FullRSSList import MyTheFinalList
+from MLModelMLC import categories, x_test, train, x_train, my_text #transfer your own list of pre-processed data from another Python Script
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.multiclass import OneVsRestClassifier

@@ -58,7 +58,7 @@ namespace WebExtractor2.Controllers
         private List<ArticleModel> GetArticlesFromDatabase(bool ascending = true)
         {
             // Connection string for MySQL database
-            string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%";
+            string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%"; 
 
             // SQL query to retrieve data from database
             string sql = "SELECT title, summary, link, published, topic FROM news";
