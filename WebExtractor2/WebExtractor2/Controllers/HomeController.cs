@@ -6,7 +6,6 @@ using WebExtractor2.Models;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
 using System.Globalization;
-using MongoDB.Driver.Builders;
 
 namespace WebExtractor2.Controllers
 {
@@ -24,8 +23,8 @@ namespace WebExtractor2.Controllers
             // Get all articles from the database
             List<ArticleModel> allArticles = GetArticlesFromDatabase();
 
-            // Get all the unique topics from the articles
-            List<string> allTopics = allArticles.SelectMany(article => article.Topic.Split(',')).Distinct().ToList();
+            // Get all the unique topics from the articles, trimming any whitespace and filtering out empty strings
+            List<string> allTopics = allArticles.SelectMany(article => article.Topic.Split(',').Select(t => t.Trim())).Where(t => !string.IsNullOrWhiteSpace(t)).Distinct().ToList();
 
             // Filter the articles by topic if a specific topic is selected
             if (!string.IsNullOrEmpty(topic))
@@ -53,12 +52,10 @@ namespace WebExtractor2.Controllers
             return View(allArticles);
         }
 
-
-
         private List<ArticleModel> GetArticlesFromDatabase(bool ascending = true)
         {
             // Connection string for MySQL database
-            string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%"; 
+            string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hs02209374%";
 
             // SQL query to retrieve data from database
             string sql = "SELECT title, summary, link, published, topic FROM news";
@@ -91,8 +88,6 @@ namespace WebExtractor2.Controllers
 
             return articles;
         }
-
-
 
         public IActionResult Privacy()
         {
