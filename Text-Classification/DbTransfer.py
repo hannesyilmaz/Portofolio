@@ -6,7 +6,7 @@ import json
 cnxn = mysql.connector.connect(
   host="localhost",
   user="root",
-  password="Hs02209374%",
+  password="password!",
   database="NewsExtractDb"
 )
 
