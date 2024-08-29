@@ -16,18 +16,19 @@ import numpy as np
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 from sklearn.model_selection import train_test_split, GridSearchCV
-from RssFeedNewArticle import printdepositlist 
+from RssFeedNewArticle_2 import printdepositlist 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 
+
 # Suppress all warning messages
 if not sys.warnoptions:
     warnings.simplefilter("ignore")
 
-# Load the data
+# Load the dataDont forget to get rid of the explicit driectory and push git update
 data_path = "/Users/Hanne/Portofolio/Text-Classification/Book1.csv"
 data_raw = pd.read_csv(data_path)
 

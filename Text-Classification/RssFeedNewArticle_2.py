@@ -2,7 +2,7 @@
 # it is then cleans and structures them to be imported by NEWMLModelMLC.py
 
 # Import packages/files
-from RssArticles import posts
+from RssArticles_1 import posts
 
 """
 import feedparser
@@ -79,6 +79,6 @@ def PrintDeposit():
 
 printdepositlist = PrintDeposit()
 
-#print(printdepositlist)
+print(printdepositlist)
 
 ######################################################################################

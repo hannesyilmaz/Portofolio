@@ -1,12 +1,19 @@
-from MLModelReturns import validDict
+from MLModelReturns_4 import validDict
 import mysql.connector
 
 # Connect to MySQL server
 cnxn = mysql.connector.connect(
+<<<<<<< HEAD:Text-Classification/DbTransfer.py
   host="localhost",
   user="root",
   password="password!",
   database="newsextractdb"
+=======
+  host="newsartcilesawsdb.ch06e22uanl7.us-east-1.rds.amazonaws.com",
+  user="NewsAdmin",
+  password="ConrecJensen1!",
+  database="newsextractdb_news"
+>>>>>>> 7a201b9 (README.md file added):Text-Classification/DbTransfer_5.py
 )
 
 

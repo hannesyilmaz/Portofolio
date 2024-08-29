@@ -6,8 +6,8 @@
 import numpy as np
 from collections import defaultdict
 from FullRSSList import MyTheFinalList
-from MLModelMLC import categories, train, x_train, vectorizer, best_clf_pipeline
-from RssFeedNewArticle import printdepositlist 
+from MLModelMLC_3 import categories, train, x_train, vectorizer, best_clf_pipeline
+from RssFeedNewArticle_2 import printdepositlist 
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from sklearn.multiclass import OneVsRestClassifier

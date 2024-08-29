@@ -1,7 +1,7 @@
 # This script takes in articles (posts) from the NEWRssArticles to extract the desired categories(title, summary, etc.)
 # Then it passes them into a new dict while fixing the data format issues.
 
-from RssArticles import posts
+from RssArticles_1 import posts
 
 import datetime
 
